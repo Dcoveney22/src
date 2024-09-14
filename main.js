@@ -2,9 +2,7 @@ import express from "express";
 const app = express();
 const port = 3000;
 
-app.listen(port, () => {
-    console.log(`Server started on port ${port}`);
-  });
+
   //create an array
 const productArray = [{
     id: 100, productItem: 'Grapes', productQty: 6
@@ -22,15 +20,19 @@ app.get("/products", (req, res) => {
     res.send(productJSON);
 });
 
-
-app.get("/products/:id=100", (req, res) => {
+app.get("/products/:id", (req, res) => {
   //Do something with the data
-  //LOOP= for (let i = 0; i < productArray.length; i++) {
-  const idSearch = req.params.productArray[i]
-    console.log(idSearch);
-    res.send(idSearch);
-    // }
+  const idSearch = req.params.id;
+    // for (let i = 0; i < productArray.length; i++) {
+    //   if (idSearch === productArray.id[i]){
+      res.send(idSearch)
+      console.log(idSearch);
+  //   }
+  // }
   });
 
+app.listen(port, () => {
+    console.log(`Server started on port ${port}`);
+  });
   ///test
     
