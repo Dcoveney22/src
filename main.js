@@ -20,17 +20,25 @@ app.get("/products", (req, res) => {
     res.send(productJSON);
 });
 
+
 app.get("/products/:id", (req, res) => {
   //Do something with the data
-  const idSearch = req.params.id;
-    // for (let i = 0; i < productArray.length; i++) {
-    //   if (idSearch === productArray.id[i]){
-      res.send(idSearch)
-      console.log(idSearch);
-  //   }
-  // }
-  });
 
+  let idSearch = req.params.id;
+
+      function inArray(itemIndex) {
+        return itemIndex.id == idSearch;
+    }
+      const x = productArray.findIndex(inArray)
+      console.log(x)
+      if (x <= -1){
+        res.send("This is not an item")
+      }else {
+        res.send(productArray[x])
+      }
+      console.log(idSearch);
+
+  });
 app.listen(port, () => {
     console.log(`Server started on port ${port}`);
   });
