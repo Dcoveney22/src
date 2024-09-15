@@ -50,12 +50,11 @@ app.get("/products/:id", (req, res) => {
 
   });
 
-
 app.listen(port, () => {
     console.log(`Server started on port ${port}`);
   });
   ///test
  
  app.get('*', function(req, res){
-    res.send(error, 404);
+    res.status(404).send(error);
   });
