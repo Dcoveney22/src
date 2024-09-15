@@ -1,7 +1,8 @@
 import express from "express";
+import createHttpError from "http-errors";
 const app = express();
 const port = 3000;
-
+app.use(express.json())
 
   //create an array
 const productArray = [{
@@ -14,12 +15,21 @@ const productArray = [{
     id: 300, productItem: 'Apple', productQty: 56
     },
   ]
-app.get("/products", (req, res) => {
-    //send the products
-    const productJSON = JSON.stringify(productArray);
-    res.send(productJSON);
-});
 
+const error = new createHttpError.BadRequest("This request was unable to be processed, please try again")  
+  
+ 
+
+app.get("/products", (req, res)=> {
+  res.send(productArray)
+})
+
+app.post("/products", (req, res) => {
+    res.json({newItem: req.body});
+    console.log(req.body)
+    productArray.push(req.body)
+    console.log(productArray)
+});
 
 app.get("/products/:id", (req, res) => {
   //Do something with the data
@@ -39,8 +49,13 @@ app.get("/products/:id", (req, res) => {
       console.log(idSearch);
 
   });
+
+
 app.listen(port, () => {
     console.log(`Server started on port ${port}`);
   });
   ///test
-    
+ 
+ app.get('*', function(req, res){
+    res.send(error, 404);
+  });
