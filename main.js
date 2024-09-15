@@ -3,6 +3,7 @@ import createHttpError from "http-errors";
 const app = express();
 const port = 3000;
 app.use(express.json())
+const error = new createHttpError.BadRequest("This request was unable to be processed, please try again")  
 
   //create an array
 const productArray = [{
@@ -15,10 +16,6 @@ const productArray = [{
     id: 300, productItem: 'Apple', productQty: 56
     },
   ]
-
-const error = new createHttpError.BadRequest("This request was unable to be processed, please try again")  
-  
- 
 
 app.get("/products", (req, res)=> {
   res.send(productArray)
